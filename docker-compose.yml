@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  react:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile-react
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
+    networks:
+      - app-network
+    environment:
+      - WATCHPACK_POLLING=true
+
+  laravel:
+    build:
+      context: ./laravel
+      dockerfile: Dockerfile-laravel
+    ports:
+      - "8000:80"
+    volumes:
+      - ./laravel:/var/www/html
+    networks:
+      - app-network
+
+  mysql_db:
+    image: mysql:latest
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: laravel
+    ports:
+      - 3306:3306
+    networks:
+      - app-network
+    expose:
+      - 3306
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    ports:
+      - 8001:80
+    environment:
+      PMA_HOST: mysql_db
+      MYSQL_ROOT_PASSWORD: root
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
