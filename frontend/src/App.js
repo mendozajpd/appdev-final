@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes, BrowserRouter} from "react-router-dom";
+
+// Root
+import RootLayout from "./components/layouts/RootLayout";
+import LandingPage from "./components/pages/root/LandingPage";
+import LoginPage from "./components/pages/root/LoginPage";
+import RegisterPage from "./components/pages/root/RegisterPage";
+
+// User
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and savdadase to reload.waw
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Lasdearn Rasdassasdeasdactsaasdasdasdas
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<RootLayout />} >
+          <Route index element={<LandingPage />} />
+          <Route path="login" element={<LoginPage />} />
+          <Route path="register" element={<RegisterPage />} />
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 
