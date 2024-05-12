@@ -91,7 +91,7 @@ function UserSideBar() {
                     <Tab eventKey="matches" title="Matches">
                         <div className='d-flex flex-wrap'>
                             {matches.map(match => (
-                                <Card className="bg-dark text-white m-1 clickable" style={{ minWidth: '6rem', maxWidth: '7rem', minHeight: '8rem' }}>
+                                <Card className="bg-dark text-white m-3 clickable" style={{ minWidth: '6rem', maxWidth: '7rem', minHeight: '8rem' }}>
                                     <Card.Img src={match.image} alt="Card image" />
                                     <Card.ImgOverlay className="d-flex align-items-end">
                                         <Card.Title>{match.name}</Card.Title>
