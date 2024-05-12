@@ -33,7 +33,7 @@ function RegisterPage() {
                             </Card.Title>
                             <Card.Title className="justify-content-center d-flex">
                                 <div className="display-5 text-bold">
-                                    Sign up to PetMatch
+                                    Create an Account
                                 </div>
                             </Card.Title>
                             <Card.Text className="justify-content-center d-flex m-5 flex-column align-items-center">
@@ -66,7 +66,11 @@ function RegisterPage() {
                                     </FloatLabel>
                                 </div>
                                 <div className="my-2">
-                                    <Button variant='light' className='text-bold' style={{ borderRadius: '5rem', width: '10rem' }}>Register</Button>
+                                    <Button variant='light' className='text-bold' style={{ border: '1px solid #a7a7a7', borderRadius: '1rem', width: '10rem' }}>
+                                        <div className="text-green">
+                                            Register
+                                        </div>
+                                    </Button>
                                 </div>
                             </Card.Text>
                         </Card.Body>

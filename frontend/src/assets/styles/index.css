@@ -40,8 +40,55 @@ code {
     linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 80%, rgba(0, 0, 0, 1) 100%) no-repeat center fixed,
     linear-gradient(to top, rgba(0, 0, 0, 0.1) 80%, rgba(0, 0, 0, 1) 100%) no-repeat center fixed,
     linear-gradient(to top, rgba(0, 0, 0, 0.4) 90%, rgba(0, 0, 0, 0.4) 90%) no-repeat center fixed,
-    url('../images/landing-bg.jpg') no-repeat center fixed;
+    url('../images/landing-bg.jpg') no-repeat center 90% fixed;
   background-size: cover, cover, cover, cover;
+}
+
+/* USER LAYOUT */
+.user-sidebar {
+  /* position: fixed; */
+  height: 100%;
+  width: 25%;
+  min-width: 25rem;
+  border: 1px solid #a7a7a7;
+}
+
+.user-sidebar-content {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.user-content {
+  width: 75%;
+  /* min-width: 50rem; */
+}
+
+.user-sidebar .nav-link {
+  color: #777777;
+}
+
+.user-sidebar .nav-link.active {
+  color: #105E03 !important;
+  font-weight: bold;
+  text-decoration: underline;
+  transition: all 0.3s;
+}
+
+.chatlist {
+  height:70vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+}
+.matchlist {
+  height:70vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.chat-y-borders {
+  border-top: 1px solid #a7a7a7;
+  border-bottom: 1px solid #a7a7a7;
 }
 
 /* MISC */
@@ -58,6 +105,22 @@ code {
   font-weight: bold;
 }
 
+.text-green {
+  color: #105E03 !important;
+}
+
 .text-white {
   color: #fff;
+}
+
+.text-gray {
+  color: #a7a7a7;
+}
+
+.text-sm {
+  font-size: 0.8rem;
+}
+
+.bg-softgreen {
+  background-color: #57af5e;
 }

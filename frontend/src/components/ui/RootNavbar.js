@@ -18,7 +18,7 @@ function RootNavbar({ showButton }) {
                 </div>
                 {showButton ?
                     <div className="d-flex">
-                        <Button onClick={() => navigate('login')} variant='light' className='text-bold' style={{ borderRadius: '5rem', width: '7rem' }}>Log in</Button>
+                        <Button onClick={() => navigate('login')} variant='light' className='text-bold text-green' style={{ border: '1px solid #a7a7a7', borderRadius: '2rem', width: '7rem' }}>Log in</Button>
                     </div>
                     : null}
             </div>

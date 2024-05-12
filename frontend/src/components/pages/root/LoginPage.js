@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Container, Button, Card, Image, ListGroup } from "react-bootstrap";
 import RootNavbar from "../../ui/RootNavbar";
 import logocat from '../../../assets/images/logo-cat.png';
-import { useNavigate } from "react-router-dom";
 
 // Prime React
 import { InputText } from "primereact/inputtext";
@@ -42,7 +41,11 @@ function LoginPage() {
                                     </FloatLabel>
                                 </div>
                                 <div className="my-2">
-                                    <Button variant='light' className='text-bold' style={{ borderRadius: '5rem', width: '10rem' }}>Log in</Button>
+                                    <Button variant='light' className='text-bold' style={{ border: '1px solid #a7a7a7',borderRadius: '1rem', width: '10rem' }}>
+                                        <div className="text-green">
+                                            Log in
+                                        </div>
+                                    </Button>
                                 </div>
                             </Card.Text>
                         </Card.Body>

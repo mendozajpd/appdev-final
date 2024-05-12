@@ -7,11 +7,23 @@ import LoginPage from "./components/pages/root/LoginPage";
 import RegisterPage from "./components/pages/root/RegisterPage";
 
 // User
+import UserLayout from "./components/layouts/UserLayout";
+import HomePage from "./components/pages/user/HomePage";
+import ProfilePage from "./components/pages/user/ProfilePage";
+import PetsPage from "./components/pages/user/PetsPage";
+import PetDetailsPage from "./components/pages/user/PetDetailsPage";
+
+// Admin
+import AdminLayout from "./components/layouts/AdminLayout";
 
 function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/" element={<UserLayout />} >
+          <Route index element={<HomePage />} />
+          <Route path="profile" element={<ProfilePage />} />
+        </Route>
         <Route path="/" element={<RootLayout />} >
           <Route index element={<LandingPage />} />
           <Route path="login" element={<LoginPage />} />
