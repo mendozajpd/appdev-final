@@ -3,8 +3,7 @@ import { Outlet } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import UserSideBar from "../ui/UserSidebar";
 
-// Prime React
-import { Sidebar } from 'primereact/sidebar';
+
 
 // Context
 import UserContext from "../../context/UserContext";
