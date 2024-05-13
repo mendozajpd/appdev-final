@@ -9,6 +9,7 @@ import RegisterPage from "./components/pages/root/RegisterPage";
 // User
 import UserLayout from "./components/layouts/UserLayout";
 import HomePage from "./components/pages/user/HomePage";
+import ChatPage from "./components/pages/user/ChatPage";
 import ProfilePage from "./components/pages/user/ProfilePage";
 import PetsPage from "./components/pages/user/PetsPage";
 import PetDetailsPage from "./components/pages/user/PetDetailsPage";
@@ -22,7 +23,7 @@ function App() {
       <Routes>
         <Route path="/" element={<UserLayout />} >
           <Route index element={<HomePage />} />
-          <Route path="profile" element={<ProfilePage />} />
+          <Route path="chat" element={<ChatPage />} />
         </Route>
         <Route path="/" element={<RootLayout />} >
           <Route index element={<LandingPage />} />

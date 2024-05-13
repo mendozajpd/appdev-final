@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Image, Tab, Tabs, Card, Row } from "react-bootstrap";
 
+import UserContext from "../../context/UserContext";
+
 function UserSideBar() {
+
+    const { sidebarState, setSidebarState } = useContext(UserContext);
 
     const matches = [
         {
@@ -74,6 +78,34 @@ function UserSideBar() {
         },
     ]
 
+    const cardHeight = '16vh';
+    const cardWidth = '12vh';
+
+    useEffect(() => {
+
+    }, []);
+
+    const tabHandler = (key) => {
+        
+    }
+
+    const getCurrentTab = () => {
+        const selectedTab = localStorage.getItem('sidebarState');
+        switch (selectedTab) {
+            case 'matches':
+                return 'matches';
+            case 'messages':
+                return 'messages';
+            default:
+                return 'matches';
+        }
+    }
+
+    const handleTabChange = (key) => {
+        setSidebarState(key);
+        localStorage.setItem('sidebarState', key);
+    }
+
     return (
         <div className="user-sidebar">
             <div className="h-25 bg-softgreen d-flex align-items-end p-4">
@@ -86,21 +118,31 @@ function UserSideBar() {
             </div>
             <div className="h-75 w-100 d-flex flex-column overflow-hidden bg-light">
                 <Tabs
-                    defaultActiveKey="matches"
+                    defaultActiveKey={getCurrentTab()}
                     id="fill-tab-example"
                     className="mb-3"
                     fill
+                    onSelect={(k) => { handleTabChange(k) }}
                 >
                     <Tab eventKey="matches" title="Matches">
                         <div className='d-flex flex-wrap'>
                             {matches.map(match => (
-                                <Card className="bg-dark text-white m-3 clickable" style={{ minWidth: '6rem', maxWidth: '7rem', minHeight: '8rem' }}>
-                                    <Card.Img src={match.image} alt="Card image" />
-                                    <Card.ImgOverlay className="d-flex align-items-end">
-                                        <Card.Title>{match.name}</Card.Title>
-                                    </Card.ImgOverlay>
+                                <Card className="no-select m-2 clickable" style={{ width: cardWidth, height: cardHeight }}>
+                                    <div style={{ position: 'absolute', textAlign: 'center', width: cardWidth, height: cardHeight }}>
+                                        <Image src={match.image} style={{ objectFit: 'cover', width: cardWidth, height: cardHeight }} />
+                                    </div>
+                                    <Card.Body className='z-index-5 d-flex align-items-center justify-content-between'>
+                                    </Card.Body>
+                                    <Card.Footer className='z-index-5 card-footer d-flex justify-content-between'>
+                                        <div>
+                                            <div className='display-8 text-bold text-white'>
+                                                {match.name}
+                                            </div>
+                                        </div>
+                                    </Card.Footer>
                                 </Card>
                             ))}
+
                         </div>
                     </Tab>
                     <Tab eventKey="messages" title="Messages">
