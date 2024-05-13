@@ -11,6 +11,7 @@ import UserLayout from "./components/layouts/UserLayout";
 import HomePage from "./components/pages/user/HomePage";
 import ChatPage from "./components/pages/user/ChatPage";
 import ProfilePage from "./components/pages/user/ProfilePage";
+import ProfileDetailsPage from "./components/pages/user/ProfileDetailsPage";
 import PetsPage from "./components/pages/user/PetsPage";
 import PetDetailsPage from "./components/pages/user/PetDetailsPage";
 
@@ -23,7 +24,11 @@ function App() {
       <Routes>
         <Route path="/" element={<UserLayout />} >
           <Route index element={<HomePage />} />
-          <Route path="chat" element={<ChatPage />} />
+          <Route path="chat/:id?" element={<ChatPage />} />
+          <Route path="profile" element={<ProfilePage />} />
+          <Route path="profile/edit" element={<ProfileDetailsPage />} />
+          <Route path="pets" element={<PetsPage />} />
+          <Route path="pets/:id?" element={<PetDetailsPage />} />
         </Route>
         <Route path="landing" element={<RootLayout />} >
           <Route index element={<LandingPage />} />

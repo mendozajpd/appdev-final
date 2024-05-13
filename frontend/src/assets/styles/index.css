@@ -64,8 +64,8 @@ code {
 }
 
 .user-white-space {
-  width: 25%;
-  min-width: 30rem;
+  width: 25rem;
+  min-width: 25rem;
 }
 
 .user-content {
@@ -86,13 +86,18 @@ code {
 }
 
 .chatlist {
-  height:70vh;
+  height: 70vh;
   overflow-y: auto;
   overflow-x: hidden;
-
 }
+
+.chat-conversation:hover {
+  background-color: rgba(207, 207, 207, 0.462);
+  transition: all 0.3s;
+}
+
 .matchlist {
-  height:70vh;
+  height: 70vh;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -114,7 +119,27 @@ code {
   bottom: 8%;
 }
 
+/* PROFILE */
+.profile-content {
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.profile-card {
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 /* MISC */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
 
 .z-index-10 {
   z-index: 10;
@@ -122,6 +147,11 @@ code {
 
 .z-index-5 {
   z-index: 5;
+}
+
+.text-justify {
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .no-select {
@@ -137,6 +167,11 @@ code {
 
 .display-8 {
   font-size: 1rem !important;
+}
+
+.clickable-highlight:hover {
+  cursor: pointer !important;
+  background-color: #cfcfcf76 !important;
 }
 
 .clickable {

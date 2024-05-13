@@ -43,10 +43,10 @@ function HomePage() {
     ]
 
     const [visible, setVisible] = useState(false);
-
     const [currentIndex, setCurrentIndex] = useState(profiles.length - 1)
     const [lastDirection, setLastDirection] = useState()
     const currentIndexRef = useRef(currentIndex)
+    const [undoAvailable, setUndoAvailable] = useState(false);
 
 
 
@@ -70,6 +70,7 @@ function HomePage() {
     const swiped = (direction, nameToDelete, index) => {
         setLastDirection(direction)
         updateCurrentIndex(index - 1)
+        setUndoAvailable(true);
     }
 
     const outOfFrame = (name, idx) => {
@@ -84,9 +85,10 @@ function HomePage() {
     }
 
     const goBack = async () => {
-        if (!canGoBack) return
+        if (!canGoBack || !undoAvailable) return
         const newIndex = currentIndex + 1
         updateCurrentIndex(newIndex)
+        setUndoAvailable(false); 
         await childRefs[newIndex].current.restoreCard()
     }
 
@@ -95,26 +97,42 @@ function HomePage() {
         setVisible(true)
     }
 
-    // const onSwipe = (direction) => {
-    //     console.log('You swiped: ' + direction)
-    // }
-
-    // const onCardLeftScreen = (myIdentifier) => {
-    //     console.log(myIdentifier + ' left the screen')
-    // }
-
     const cardHeight = '70vh';
     const cardWidth = '50vh';
 
 
     return (
         <div className=" h-100 d-flex justify-content-center py-5" style={{ minWidth: '50rem' }}>
-            <Dialog header="Header" visible={visible} style={{ width: '35vw' }} onHide={() => setVisible(false)}>
+            <Dialog className="overflow-hidden" draggable={false} header="Profile Details" visible={visible} style={{ width: '30rem', height: '50rem' }} onHide={() => setVisible(false)}>
                 <p className="m-0">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    <div className='position-absolute' style={{ width: '27rem' }}>
+                        <Image src='https://via.placeholder.com/150' className='w-100' />
+                    </div>
+                    <div style={{ width: '27rem' }}>
+                        <Image src='https://via.placeholder.com/150' className='w-100' />
+                    </div>
+                    <div className='my-3'>
+                        <div className='display-7 text-bold'>
+                            Name, Age
+                        </div>
+                        <div className='mb-3'>
+                            Adopting
+                        </div>
+                        <p className='text-justify'>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
+                    </div>
                 </p>
             </Dialog>
             <div className="mx-5 d-flex justify-content-center p-5" style={{ width: '20rem' }}>
