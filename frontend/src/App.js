@@ -14,6 +14,7 @@ import ProfilePage from "./components/pages/user/ProfilePage";
 import ProfileDetailsPage from "./components/pages/user/ProfileDetailsPage";
 import PetsPage from "./components/pages/user/PetsPage";
 import PetDetailsPage from "./components/pages/user/PetDetailsPage";
+import PetEditPage from "./components/pages/user/PetEditPage";
 
 // Admin
 import AdminLayout from "./components/layouts/AdminLayout";
@@ -29,6 +30,7 @@ function App() {
           <Route path="profile/edit" element={<ProfileDetailsPage />} />
           <Route path="pets" element={<PetsPage />} />
           <Route path="pets/:id?" element={<PetDetailsPage />} />
+          <Route path="pets/:id?/edit" element={<PetEditPage />} />
         </Route>
         <Route path="landing" element={<RootLayout />} >
           <Route index element={<LandingPage />} />

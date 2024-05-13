@@ -2,29 +2,29 @@ import React, { useState, useMemo, useRef } from 'react'
 import { Image, Card, Row, Button, Col, ListGroup } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom'
 
-
 // Prime React
-import { Dialog } from 'primereact/dialog';
 import { FileUpload } from 'primereact/fileupload';
-import { InputText } from 'primereact/inputtext';
 import { InputTextarea } from 'primereact/inputtextarea';
 
-function ProfileDetailsPage() {
+function PetEditPage() {
 
     const navigate = useNavigate();
 
     const [visible, setVisible] = useState(false);
     const [value, setValue] = useState('');
 
+    const openProfileDetails = () => {
+        console.log('open profile details')
+        setVisible(true)
+    }
+
+    const goBack = () => {
+        navigate(-1);
+    }
+
     const onUpload = () => {
         // toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' });
     };
-
-    const redirectToProfile = () => {
-        navigate('/profile')
-    }
-
-
 
     return (
         <>
@@ -32,9 +32,9 @@ function ProfileDetailsPage() {
                 <Card className='overflow-auto' style={{ width: '30rem', maxHeight: '100vh' }}>
                     <Card.Header>
                         <div className='d-flex align-items-center'>
-                            <i className="fa fa-arrow-left mx-2 clickable" onClick={() => redirectToProfile()} />
+                            <i className="fa fa-arrow-left mx-2 clickable" onClick={() => goBack()} />
                             <div className='text-bold display-8'>
-                                Profile Details
+                                Edit Pet Details
                             </div>
                         </div>
                     </Card.Header>
@@ -63,5 +63,5 @@ function ProfileDetailsPage() {
     )
 }
 
-export default ProfileDetailsPage;
+export default PetEditPage;
 

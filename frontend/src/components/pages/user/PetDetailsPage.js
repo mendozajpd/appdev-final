@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 // Prime React
 import { Dialog } from 'primereact/dialog';
 
-function ProfilePage() {
+function PetDetailsPage() {
 
     const navigate = useNavigate();
 
@@ -18,6 +18,10 @@ function ProfilePage() {
 
     const redirectToPets = () => {
         navigate('/pets')
+    }
+
+    const redirectToPetEdit = () => {
+        navigate('edit')
     }
 
     return (
@@ -45,7 +49,7 @@ function ProfilePage() {
                         <ListGroup.Item>Yesser</ListGroup.Item>
                     </ListGroup>
                     <Card.Body>
-                        <Button variant='secondary'>
+                        <Button onClick={() => redirectToPetEdit()} variant='secondary'>
                             Edit
                         </Button>
                         <Button variant='danger' className='mx-2'>
@@ -59,5 +63,5 @@ function ProfilePage() {
     )
 }
 
-export default ProfilePage;
+export default PetDetailsPage;
 

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Image, Tab, Tabs, Card, Row } from "react-bootstrap";
+import { Image, Tab, Tabs, Card, Row, Button } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
 
 import UserContext from "../../context/UserContext";
@@ -152,9 +152,14 @@ function UserSideBar() {
                     modal={false}
                 >
                     <h2>Settings</h2>
-                    <div className='mt-5'>
+                    <div className='m-5'>
                         <h6>Adoption Mode</h6>
                         <InputSwitch checked={checked} onChange={(e) => setChecked(e.value)} />
+                    </div>
+                    <div className='m-5'>
+                        <Button variant='light' style={{border: '1px solid #a7a7a7'}}>
+                            Logout
+                        </Button>
                     </div>
                 </Sidebar>
             </div>

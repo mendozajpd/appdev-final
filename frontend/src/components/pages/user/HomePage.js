@@ -88,7 +88,7 @@ function HomePage() {
         if (!canGoBack || !undoAvailable) return
         const newIndex = currentIndex + 1
         updateCurrentIndex(newIndex)
-        setUndoAvailable(false); 
+        setUndoAvailable(false);
         await childRefs[newIndex].current.restoreCard()
     }
 
@@ -149,8 +149,6 @@ function HomePage() {
                                 <Image src={profile.image} style={{ objectFit: 'cover', width: cardWidth, height: cardHeight }} />
                             </div>
                             <Card.Body className='z-index-5 d-flex align-items-center justify-content-between'>
-                                {/* <i onClick={() => console.log('left')} className='fa fa-arrow-left display-7 clickable text-white' />
-                                <i onClick={() => console.log('right')} className='fa fa-arrow-right display-7 clickable text-white' /> */}
                             </Card.Body>
                             <Card.Footer className='z-index-5 card-footer d-flex justify-content-between'>
                                 <div>
@@ -168,6 +166,9 @@ function HomePage() {
                         </Card>
                     </TinderCard>
                 ))}
+                <div className='d-flex align-items-center'>
+                    Wow.. so empty
+                </div>
             </div>
             <div className='align-items-end d-flex z-index-10 match-options' style={{ width: '25rem' }}>
                 <Row style={{ width: '50rem' }}>
