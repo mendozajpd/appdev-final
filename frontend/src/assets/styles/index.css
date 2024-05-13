@@ -46,20 +46,24 @@ code {
 
 /* USER LAYOUT */
 .user-sidebar {
-  /* position: fixed; */
+  position: fixed;
   height: 100%;
   width: 25%;
   min-width: 25rem;
   border: 1px solid #a7a7a7;
+  z-index: 50;
 }
 
 .user-sidebar-content {
   overflow-x: hidden;
   overflow-y: auto;
+  left: 25%;
+  position: fixed;
+  z-index: 0;
 }
 
 .user-content {
-  width: 75%;
+  width: 100%;
   /* min-width: 50rem; */
 }
 
@@ -92,6 +96,21 @@ code {
 }
 
 /* MISC */
+
+.z-index-10 {
+  z-index: 10;
+}
+
+.z-index-5 {
+  z-index: 5;
+}
+
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 
 .display-7 {
   font-size: 1.5rem;

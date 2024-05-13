@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Image, Tab, Tabs, Card, Row } from "react-bootstrap";
+import { Image, Tab, Tabs, Card, Row } from "react-bootstrap";
 
 function UserSideBar() {
 
@@ -78,10 +78,13 @@ function UserSideBar() {
         <div className="user-sidebar">
             <div className="h-25 bg-softgreen d-flex align-items-end p-4">
                 <div className=''>
-                    <Image src="https://via.placeholder.com/150" roundedCircle style={{ height: '8rem' }} />
+                    <Image src="https://via.placeholder.com/150" roundedCircle style={{ height: '5rem' }} />
+                </div>
+                <div className='my-4 mx-3 display-7 text-white text-bold'>
+                    My Profile
                 </div>
             </div>
-            <div className="h-75 w-100 d-flex flex-column overflow-hidden">
+            <div className="h-75 w-100 d-flex flex-column overflow-hidden bg-light">
                 <Tabs
                     defaultActiveKey="matches"
                     id="fill-tab-example"
