@@ -12,7 +12,7 @@ function RootNavbar({ showButton }) {
                     <div className="d-flex clickable" onClick={() => navigate('/')}>
                         <Image src={logo} alt="logo" className="mx-2" style={{ height: '3rem', width: '3rem' }} />
                     </div>
-                    <div className="display-6 text-white text-bold clickable" onClick={() => navigate('/')}>
+                    <div className="display-6 text-white text-bold clickable" onClick={() => navigate('/landing')}>
                         PetMatch
                     </div>
                 </div>

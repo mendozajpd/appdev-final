@@ -25,7 +25,7 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path="chat" element={<ChatPage />} />
         </Route>
-        <Route path="/" element={<RootLayout />} >
+        <Route path="landing" element={<RootLayout />} >
           <Route index element={<LandingPage />} />
           <Route path="login" element={<LoginPage />} />
           <Route path="register" element={<RegisterPage />} />

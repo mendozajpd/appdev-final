@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Container, Button, Card, Image, ListGroup } from "react-bootstrap";
+import { Link, useNavigate } from 'react-router-dom';
 import RootNavbar from "../../ui/RootNavbar";
 import logocat from '../../../assets/images/logo-cat.png';
 
@@ -76,7 +77,7 @@ function RegisterPage() {
                         </Card.Body>
                         <Card.Footer className="justify-content-center d-flex">
                             <div>
-                                Already have an account? <a href="/login">Log in</a>
+                                Already have an account? <Link to="/landing/login">Log in</Link>
                             </div>
                         </Card.Footer>
                     </Card>

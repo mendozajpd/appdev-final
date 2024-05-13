@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Container, Button, Card, Image, ListGroup } from "react-bootstrap";
+import { Link, useNavigate } from 'react-router-dom';
 import RootNavbar from "../../ui/RootNavbar";
 import logocat from '../../../assets/images/logo-cat.png';
 
@@ -51,7 +52,7 @@ function LoginPage() {
                         </Card.Body>
                         <Card.Footer className="justify-content-center d-flex">
                             <div>
-                                Don't have an account? <a href="/register">Sign up</a>
+                                Don't have an account? <Link to="/landing/register">Sign up</Link>
                             </div>
                         </Card.Footer>
                     </Card>
