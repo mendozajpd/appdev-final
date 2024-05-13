@@ -8,22 +8,17 @@ use App\Http\Controllers\Controller;
 
 class AuthController extends Controller
 {
-    public function login(Request $request)
+    public function login()
     {
-        $credentials = $request->only('email', 'password');
-
-        if (auth()->attempt($credentials)) {
-            $token = auth()->user()->createToken('authToken')->plainTextToken;
-
-            return response()->json([
-                'token' => $token,
-                'message' => 'Login successful'
-            ], 200);
+        $credentials = request(['email', 'password']);
+    
+        if (!$token = auth()->attempt($credentials)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
         }
-
-        return response()->json([
-            'message' => 'Invalid credentials'
-        ], 401);
+    
+        $user = auth()->user();
+    
+        return $this->respondWithToken($token);
     }
 
     public function logout(Request $request)
