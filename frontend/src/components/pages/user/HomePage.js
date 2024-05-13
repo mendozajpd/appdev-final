@@ -105,9 +105,9 @@ function HomePage() {
         <div className=" h-100 d-flex justify-content-center py-5" style={{ minWidth: '50rem' }}>
             <Dialog className="overflow-hidden" draggable={false} header="Profile Details" visible={visible} style={{ width: '30rem', height: '50rem' }} onHide={() => setVisible(false)}>
                 <p className="m-0">
-                    <div className='position-absolute' style={{ width: '27rem' }}>
+                    {/* <div className='position-absolute shadow' style={{ width: '27rem' }}>
                         <Image src='https://via.placeholder.com/150' className='w-100' />
-                    </div>
+                    </div> */}
                     <div style={{ width: '27rem' }}>
                         <Image src='https://via.placeholder.com/150' className='w-100' />
                     </div>
