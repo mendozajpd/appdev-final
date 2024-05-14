@@ -208,9 +208,9 @@ function UserSideBar() {
                         <Tab eventKey="matches" title="Matches">
                             <div className='d-flex flex-wrap'>
                                 {matches.map(match => (
-                                    <Card className="no-select m-2 clickable" style={{ width: cardWidth, height: cardHeight }}>
-                                        <div style={{ position: 'absolute', textAlign: 'center', width: cardWidth, height: cardHeight }}>
-                                            <Image src={match.image} style={{ objectFit: 'cover', width: cardWidth, height: cardHeight }} />
+                                    <Card className="no-select m-2 clickable" style={{ minHeight: '120px', minWidth: '100px', width: cardWidth, height: cardHeight }}>
+                                        <div style={{ position: 'absolute', textAlign: 'center', minHeight: '120px', minWidth: '100px', width: cardWidth, height: cardHeight }}>
+                                            <Image src={match.image} style={{ objectFit: 'cover', minHeight: '120px', minWidth: '100px', width: cardWidth, height: cardHeight }} />
                                         </div>
                                         <Card.Body className='z-index-5 d-flex align-items-center justify-content-between'>
                                         </Card.Body>
@@ -223,7 +223,6 @@ function UserSideBar() {
                                         </Card.Footer>
                                     </Card>
                                 ))}
-
                             </div>
                         </Tab>
                         <Tab eventKey="messages" title="Messages">

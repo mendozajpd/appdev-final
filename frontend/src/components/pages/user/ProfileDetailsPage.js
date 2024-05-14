@@ -1,7 +1,12 @@
-import React, { useState, useMemo, useRef } from 'react'
+import React, { useState, useMemo, useRef, useContext } from 'react'
 import { Image, Card, Row, Button, Col, ListGroup } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom'
 
+// Context
+import UserContext from "../../../context/UserContext";
+
+// Services
+import { getPFP } from '../../../services/AccountServices';
 
 // Prime React
 import { Dialog } from 'primereact/dialog';
@@ -13,6 +18,7 @@ function ProfileDetailsPage() {
 
     const navigate = useNavigate();
 
+    const { user } = useContext(UserContext);
     const [visible, setVisible] = useState(false);
     const [value, setValue] = useState('');
 
@@ -38,21 +44,23 @@ function ProfileDetailsPage() {
                             </div>
                         </div>
                     </Card.Header>
-                    <Card.Img variant="top" src="https://via.placeholder.com/150" />
+                    {user && user.user_info ?
+                        <Card.Img variant="top" src={getPFP(user.user_info.pic)} style={{height:'35rem', objectFit: 'cover'}} /> :
+                        <Card.Img variant="top" src="https://via.placeholder.com/150" />
+
+                    }
+                    {/* <Card.Img variant="top" src="https://via.placeholder.com/150" /> */}
                     <Card.Body>
                         <Card.Title>Upload Photo</Card.Title>
                         <Card.Text>
                             <FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" maxFileSize={1000000} onUpload={onUpload} />
                         </Card.Text>
-                        <Card.Title>Description</Card.Title>
+                        <Card.Title>New Bio</Card.Title>
                         <Card.Text>
                             <InputTextarea autoResize value={value} onChange={(e) => setValue(e.target.value)} rows={5} cols={30} />
                         </Card.Text>
                     </Card.Body>
                     <Card.Body>
-                        <Button variant='secondary' disabled>
-                            Undo
-                        </Button>
                         <Button variant='success' className='mx-2'>
                             Save Changes
                         </Button>
