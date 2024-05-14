@@ -10,7 +10,7 @@ import { Password } from 'primereact/password';
 import { FloatLabel } from "primereact/floatlabel";
 
 // Services
-import { login } from '../../../services/AccountServices';
+import { login, getProfile } from '../../../services/AccountServices';
 
 // Context
 import ToastContext from '../../../context/ToastContext';
@@ -24,15 +24,14 @@ function LoginPage() {
 
     const handleLogin = async () => {
         try {
-            const response = await login(email, password);
+            const response = await login(email, password);            
             navigate('/');
-            localStorage.setItem('token', "Bearer " + response.access_token);
+            localStorage.setItem('token', response.access_token);
             console.log(response);
             // Navigate to another page or do something with the response
         } catch (error) {
             console.error('Error during login:', error);
             showToast('error', 'Error', 'Invalid email or password!') // Show an error message
-            // Show an error message
         }
     };
 

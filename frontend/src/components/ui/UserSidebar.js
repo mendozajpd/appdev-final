@@ -4,16 +4,22 @@ import { useNavigate } from 'react-router-dom';
 
 import UserContext from "../../context/UserContext";
 
+// Services
+import { logout, getPFP } from '../../services/AccountServices';
+
 // PrimeReact
 import { Sidebar } from 'primereact/sidebar';
 import { InputSwitch } from 'primereact/inputswitch';
 
+// Assets
+import tempIcon from '../../assets/images/profile-icon.jpg';
+
 function UserSideBar() {
 
-
     const [visible, setVisible] = useState(false);
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
-    const { sidebarState, setSidebarState } = useContext(UserContext);
+    const { sidebarState, setSidebarState, user, setUser } = useContext(UserContext);
 
     // ADOPTION OR NOT
     const [checked, setChecked] = useState(false);
@@ -91,9 +97,12 @@ function UserSideBar() {
 
     const cardHeight = '16vh';
     const cardWidth = '12vh';
+    const userPic = '';
 
     useEffect(() => {
-
+        if (user !== null) {
+            setLoading(false);
+        }
     }, []);
 
 
@@ -139,6 +148,17 @@ function UserSideBar() {
         }
     }
 
+    const handleLogout = () => {
+        const token = localStorage.getItem('token');
+        logout('Bearer ' + token);
+        localStorage.removeItem('token');
+        navigate('/landing/login');
+    }
+
+    if (loading) {
+        return <div> Loading...</div>
+    }
+
     return (
         <>
             <div className="card flex justify-content-center">
@@ -157,7 +177,7 @@ function UserSideBar() {
                         <InputSwitch checked={checked} onChange={(e) => setChecked(e.value)} />
                     </div>
                     <div className='m-5'>
-                        <Button variant='light' style={{border: '1px solid #a7a7a7'}}>
+                        <Button onClick={() => handleLogout()} variant='light' style={{ border: '1px solid #a7a7a7' }}>
                             Logout
                         </Button>
                     </div>
@@ -166,7 +186,12 @@ function UserSideBar() {
             <div className="user-sidebar">
                 <div className="h-25 bg-softgreen d-flex align-items-end p-4">
                     <div onClick={() => handleClickProfile()} className='clickable'>
-                        <Image src="https://via.placeholder.com/150" roundedCircle style={{ height: '5rem' }} />
+                        {/* <Image src={user ? getPFP(user.user_info.pic) : tempIcon} roundedCircle style={{ height: '5rem', width: '5rem' }} /> */}
+                        {user && user.user_info ?
+                            <Image src={getPFP(user.user_info.pic)} roundedCircle style={{ height: '5rem', width: '5rem' }} />
+                            :
+                            <Image src={tempIcon} roundedCircle style={{ height: '5rem', width: '5rem' }} />
+                        }
                     </div>
                     <div onClick={() => handleClickProfile()} className='clickable my-4 mx-3 display-7 text-white text-bold'>
                         My Profile

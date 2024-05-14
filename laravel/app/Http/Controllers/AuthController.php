@@ -21,18 +21,18 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
     }
 
-    public function logout(Request $request)
+    public function logout()
     {
-        auth()->user()->tokens()->delete();
+        auth()->logout();
 
-        return response()->json([
-            'message' => 'Logout successful'
-        ], 200);
+        return response()->json(['message' => 'Successfully logged out']);
     }
 
     public function me()
     {
-        return response()->json(auth()->user());
+        $user = auth()->user();
+        $user->load('userInfo');
+        return response()->json($user);
     }
 
     public function test() {

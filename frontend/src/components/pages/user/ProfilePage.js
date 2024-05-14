@@ -1,6 +1,16 @@
-import React, { useState, useMemo, useRef } from 'react'
+import React, { useState, useMemo, useRef, useContext } from 'react'
 import { Image, Card, Row, Button, Col } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom'
+
+// Assets
+import tempIcon from '../../../assets/images/profile-icon.jpg';
+
+// Context
+import UserContext from "../../../context/UserContext";
+
+
+// Services
+import { getPFP } from '../../../services/AccountServices';
 
 // Prime React
 import { Dialog } from 'primereact/dialog';
@@ -8,6 +18,7 @@ import { Dialog } from 'primereact/dialog';
 function ProfilePage() {
 
     const navigate = useNavigate();
+    const { user } = useContext(UserContext);
 
     const profiles = [
         {
@@ -110,21 +121,29 @@ function ProfilePage() {
         navigate('edit')
     }
 
+
+
     return (
         <>
             <div className=" h-100 d-flex justify-content-center py-5 profile-content" style={{ minWidth: '50rem' }}>
                 <div className="mx-5 d-flex justify-content-center px-5 profile-card" style={{ width: '30rem' }}>
                     <div className='d-flex flex-column'>
                         <div>
-                            <Image src="https://via.placeholder.com/150" style={{ objectFit: 'cover', width: '30rem', height: '30rem' }} />
+                            {user && user.user_info ?
+                                <Image src={getPFP(user.user_info.pic)} style={{ objectFit: 'cover', width: '30rem', height: '30rem' }} />
+                                :
+                                <Image src={tempIcon} roundedCircle style={{ bjectFit: 'cover', width: '30rem', height: '30rem' }} />
+                            }
                         </div>
                         <div className='d-flex p-2 display-7 justify-content-between'>
                             <div className='d-flex'>
-                                <div className='text-bold'>
-                                    NAME
-                                </div>
-                                <div className='px-3 display-8 d-flex align-items-end'>
-                                    AGE
+                                <div className='text-bold text-truncate' style={{ width: '8rem' }}>
+                                    {
+                                        user && user.user_info ?
+                                            user.name
+                                            :
+                                            'Loading...'
+                                    }
                                 </div>
                             </div>
                             <div>
@@ -138,11 +157,12 @@ function ProfilePage() {
                         </div>
                         <div className='my-2'>
                             <p className='m-3 text-justify'>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus nec nunc
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus nec nunc
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus nec nunc
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus nec nunc
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus nec nunc
+                                {
+                                    user && user.user_info ?
+                                        (user.user_info.description !== '' ? user.user_info.description : "You don't have a bio")
+                                        :
+                                        'Loading...'
+                                }
                             </p>
                         </div>
                     </div>
