@@ -4,10 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\Matched;
 use App\Models\MatchRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MatchController extends Controller
 {
+    public function findNew () {
+        $currentUser = auth()->user(); // get the current logged in user
+    
+        $users = User::whereDoesntHave('sentMatchRequests', function ($query) use ($currentUser) {
+            $query->where('user_1', $currentUser->id);
+        })->whereDoesntHave('receivedMatchRequests', function ($query) use ($currentUser) {
+            $query->where('user_2', $currentUser->id);
+        })->get();
+    
+        return response()->json($users);
+    }
+
     public function createMatch(Request $request) {
         $matchRequest = new MatchRequest();
         $matchRequest->user_1 = $request->user_1;
