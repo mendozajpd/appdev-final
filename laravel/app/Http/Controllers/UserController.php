@@ -26,7 +26,14 @@ class UserController extends Controller
         $userInfo->user_id = $user->id;
         $userInfo->birthday = $request->birthday;
         $userInfo->description = $request->description;
-        $userInfo->pic = $request->pic;
+        if ($request->hasFile('uploadedFile')) {
+            $currentTime = time();
+            $hashedTime = hash('sha256', $currentTime);
+            $extension = $request->file('uploadedFile')->getClientOriginalExtension();
+            $request->file('uploadedFile')->storeAs('profile_pics', $hashedTime . '.' . $extension, 'public');
+            $profilePicName = $hashedTime . '.' . $extension;
+            $userInfo->pic = $profilePicName;
+        }
         $userInfo->save();
         
         return response()->json(['message' => 'User registered successfully'], 201);

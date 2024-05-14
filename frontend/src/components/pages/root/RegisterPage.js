@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { Container, Button, Card, Image, ListGroup } from "react-bootstrap";
 import { Link, useNavigate } from 'react-router-dom';
 import RootNavbar from "../../ui/RootNavbar";
@@ -9,18 +9,79 @@ import { InputText } from "primereact/inputtext";
 import { Password } from 'primereact/password';
 import { FloatLabel } from "primereact/floatlabel";
 import { Calendar } from 'primereact/calendar';
-import { Dropdown } from 'primereact/dropdown';
+import { FileUpload } from 'primereact/fileupload';
+
+// Services
+import { register } from '../../../services/AccountServices';
+
+// Context
+import ToastContext from '../../../context/ToastContext';
 
 function RegisterPage() {
-    const [value, setValue] = useState('');
-    const [value1, setValue1] = useState('');
-    const [gender, setGender] = useState('');
-    const [date, setDate] = useState([]);
-    const genders = [
-        { name: 'Male', code: 'M' },
-        { name: 'Female', code: 'F' },
-        { name: 'Other', code: '?' },
-    ];
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [birthday, setBirthDate] = useState(null);
+    const [uploadedFile, setUploadedFile] = useState(null);
+    const showToast = useContext(ToastContext);
+
+    const fileUploadRef = useRef(null);
+    const navigate = useNavigate();
+
+    const clearFields = () => {
+        fileUploadRef.current.clear();
+        setName('');
+        setEmail('');
+        setPassword('');
+        setBirthDate(null);
+        setUploadedFile(null);
+    }
+
+    const handleRegister = async () => {
+        const file = fileUploadRef.current.getFiles()[0];
+        console.log('uploadedFile', file)
+
+        if (name === '') {
+            showToast('error', 'Error', 'Name cannot be empty!')
+            return;
+        }
+        if (email === '') {
+            showToast('error', 'Error', 'Email cannot be empty!')
+            return;
+        }
+        if (password === '') {
+            showToast('error', 'Error', 'Password cannot be empty!')
+            return;
+        }
+        if (file === null) {
+            showToast('error', 'Error', 'Profile picture cannot be empty!')
+            return;
+        }
+        if (birthday === null) {
+            showToast('error', 'Error', 'Birthday cannot be empty!')
+            return;
+        }
+        const formattedBirthDate = birthday.toISOString().split('T')[0];
+
+        // Create a new FormData instance
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('email', email);
+        formData.append('password', password);
+        formData.append('uploadedFile', file);
+        formData.append('birthday', formattedBirthDate);
+
+        try {
+            showToast('success', 'Success', 'User registered successfully')
+            const response = await register(formData); // Send formData instead of userData
+            clearFields();
+            navigate('/landing/login');
+            console.log(response);
+        } catch (error) {
+            showToast('error', 'Error', error)
+            console.error('Error during registration:', error);
+        }
+    };
 
     return (
         <Container fluid className="vh-100 g-0">
@@ -40,34 +101,34 @@ function RegisterPage() {
                             <Card.Text className="justify-content-center d-flex m-5 flex-column align-items-center">
                                 <div className="my-3">
                                     <FloatLabel>
-                                        <InputText id="name" value={value} onChange={(e) => setValue(e.target.value)} style={{ width: '17.5rem' }} />
+                                        <InputText id="name" value={name} onChange={(e) => setName(e.target.value)} style={{ width: '17.5rem' }} />
                                         <label htmlFor="name">Name</label>
                                     </FloatLabel>
                                 </div>
                                 <div className="my-3">
                                     <FloatLabel>
-                                        <InputText id="email" value={value} onChange={(e) => setValue(e.target.value)} style={{ width: '17.5rem' }} />
+                                        <InputText id="email" value={email} onChange={(e) => setEmail(e.target.value)} style={{ width: '17.5rem' }} />
                                         <label htmlFor="email">Email</label>
                                     </FloatLabel>
                                 </div>
                                 <div className="my-3">
                                     <FloatLabel>
-                                        <Password value={value1} onChange={(e) => setValue1(e.target.value1)} feedback={false} tabIndex={1} />
+                                        <Password value={password} onChange={(e) => setPassword(e.target.value)} feedback={false} tabIndex={1} />
                                         <label htmlFor="password">Password</label>
                                     </FloatLabel>
                                 </div>
                                 <div className="my-3">
-                                    <Dropdown value={gender} onChange={(e) => setGender(e.value)} options={genders} optionLabel="name"
-                                        placeholder="Gender" style={{ width: '17.5rem' }} />
+                                    <FileUpload ref={fileUploadRef} mode="basic" name="demo[]" url="/api/upload" accept="image/*" maxFileSize={1000000} />
                                 </div>
                                 <div className="my-3">
                                     <FloatLabel>
-                                        <Calendar inputId="birth_date" value={date} onChange={(e) => setDate(e.value)} placeholder="Birthday" />
+                                        <Calendar inputId="birth_date" value={birthday} onChange={(e) => setBirthDate(e.value)} placeholder="Birthday" />
                                         <label htmlFor="birth_date">Birth Date</label>
                                     </FloatLabel>
                                 </div>
                                 <div className="my-2">
-                                    <Button variant='light' className='text-bold' style={{ border: '1px solid #a7a7a7', borderRadius: '1rem', width: '10rem' }}>
+                                    <Button variant='light' className='text-bold' style={{ border: '1px solid #a7a7a7', borderRadius: '1rem', width: '10rem' }}
+                                        onClick={handleRegister}>
                                         <div className="text-green">
                                             Register
                                         </div>
